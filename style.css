@@ -11,6 +11,9 @@
 .selected {
     background-color: #eee;
 }
+.date{
+    text-align: center;
+}
 .outside .date {
     color: #ccc;
 }

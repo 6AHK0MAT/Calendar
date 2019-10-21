@@ -11,7 +11,7 @@
 <body>
 
 <div class="container theme-showcase">
-    <h1>Calendar</h1>
+    <h1 style="text-align: center">Календарь руководителя</h1>
     <div id="holder" class="row" ></div>
 </div>
 
@@ -24,13 +24,13 @@
       first = new Date(year, month, 1),
       last = new Date(year, month + 1, 0),
       startingDay = first.getDay(),
-      thedate = new Date(year, month, 1 - startingDay),
+      thedate = new Date(year, month, 2 - startingDay),
       dayclass = lastmonthcss,
       today = new Date(),
       i, j;
   if (mode === 'week') {
     thedate = new Date(date);
-    thedate.setDate(date.getDate() - date.getDay());
+    thedate.setDate(date.getDate() - date.getDay() + 1);
     first = new Date(thedate);
     last = new Date(thedate);
     last.setDate(last.getDate()+6);
@@ -64,16 +64,16 @@
                     {{ } }}
                     <button class="js-cal-years btn btn-link">{{: year}}</button>
                   {{ } else { }}
-                    <button class="btn btn-link disabled">{{: date.toDateString() }}</button>
+                    <button class="btn btn-link disabled">{{: first.getDate() }} {{: months[month] }} {{: year}}</button>
                   {{ } }}
                 </span>
               </td>
               <td style="text-align: right">
                 <span class="btn-group">
-                  <button class="js-cal-option btn btn-default {{: mode==='year'? 'active':'' }}" data-mode="year">Year</button>
-                  <button class="js-cal-option btn btn-default {{: mode==='month'? 'active':'' }}" data-mode="month">Month</button>
-                  <button class="js-cal-option btn btn-default {{: mode==='week'? 'active':'' }}" data-mode="week">Week</button>
-                  <button class="js-cal-option btn btn-default {{: mode==='day'? 'active':'' }}" data-mode="day">Day</button>
+                  <button class="js-cal-option btn btn-default {{: mode==='year'? 'active':'' }}" data-mode="year">Год</button>
+                  <button class="js-cal-option btn btn-default {{: mode==='month'? 'active':'' }}" data-mode="month">Месяц</button>
+                  <button class="js-cal-option btn btn-default {{: mode==='week'? 'active':'' }}" data-mode="week">Неделя</button>
+                  <button class="js-cal-option btn btn-default {{: mode==='day'? 'active':'' }}" data-mode="day">День</button>
                 </span>
               </td>
             </tr>
@@ -135,11 +135,11 @@
             </thead>
             <tbody>
               <tr>
-                <th class="timetitle" >All Day</th>
+                <th class="timetitle" >Весь день</th>
                 <td class="{{: date.toDateCssClass() }}">  </td>
               </tr>
               <tr>
-                <th class="timetitle" >Before 6 AM</th>
+                <th class="timetitle" >До 6 AM</th>
                 <td class="time-0-0"> </td>
               </tr>
               {{for (i = 6; i < 22; i++) { }}
@@ -153,7 +153,7 @@
               </tr>
               {{ } }}
               <tr>
-                <th class="timetitle" >After 10 PM</th>
+                <th class="timetitle" >После 10 PM</th>
                 <td class="time-22-0"> </td>
               </tr>
             </tbody>
@@ -165,28 +165,6 @@
   </table>
 </script>
 
-<div class="container">
-    <hr>
-    <p>Resources</p>
-    <ul>
-        <li><a href="https://github.com/twbs/bootstrap">Bootstrap</a></li>
-        <li><a href="https://bootstrap-calendar.azurewebsites.net/index-bs3.html">another calendar</a></li>
-        <li><a href="http://www.bootply.com/rzNQTlDlFX">another calendar</a></li>
-        <li><a href="http://slipsum.com">lipsum generator</a></li>
-    </ul>
-</div>
-<div class="container">
-    <hr>
-    <p>Notes</p>
-    <ul>
-        <li>clicking on year to open and let you jump around 5ish years, don't care for current ui...</li>
-        <li>work needed on day mode (buggy, unfinished)</li>
-        <li>options missing still for classes</li>
-        <li>not sure about popover contents</li>
-        <li>? use of success state color and info state color ?</li>
-        <li><a href="http://www.reddit.com/r/css/comments/2gvw4n/i_refactored_my_less_to_follow_fats_guidelines/">can do better with css rules</a></li>
-    </ul>
-</div>
 <script>
     var $currentPopover = null;
     $(document).on('shown.bs.popover', function (ev) {
@@ -405,7 +383,8 @@
                 }
             });
         })({
-            days: ["Воскресенье", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"],
+            // days: ["Воскресенье", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"],
+            days: ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"],
             months: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
             shortMonths: ["Янв", "Фев", "Мар", "Апр", "Май", "Июнь", "Июль", "Авг", "Сен", "Окт", "Ноя", "Дек"],
             date: (new Date()),
